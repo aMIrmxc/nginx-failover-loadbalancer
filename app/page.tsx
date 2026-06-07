@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import PageContent from "./page-content";
+import ServerStatusBadge from "@/components/ServerStatusBadge";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "کارا کد - خدمات ویژه طراحی و توسعه وب",
@@ -46,5 +49,12 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  return <PageContent />;
+  const serverName: string = process.env.SERVER_NAME || "سرور ناشناخته";
+
+  return (
+    <>
+      <ServerStatusBadge serverName={serverName} />
+      <PageContent />
+    </>
+  );
 }

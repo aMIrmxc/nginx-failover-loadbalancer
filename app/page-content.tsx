@@ -36,10 +36,14 @@ const jsonLd = {
   ],
 };
 
+
+
+
 export default function PageContent() {
   const [isVisible, setIsVisible] = useState(false);
   const [showFloatingButton, setShowFloatingButton] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
