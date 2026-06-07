@@ -1,0 +1,31 @@
+
+services:
+  # کانتینر اول Next.js
+  nextjs-node-1:
+    build: .
+    container_name: nextjs-node-1
+    environment:
+      - SERVER_NAME=Server-Primary (کانتینر اول)
+    expose:
+      - "3000"
+
+  # کانتینر دوم Next.js
+  nextjs-node-2:
+    build: .
+    container_name: nextjs-node-2
+    environment:
+      - SERVER_NAME=Server-Backup (کانتینر دوم)
+    expose:
+      - "3000"
+
+  # لودبالانسر Nginx
+  nginx_lb:
+    image: nginx:alpine
+    container_name: nginx_load_balancer
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - nextjs-node-1
+      - nextjs-node-2
